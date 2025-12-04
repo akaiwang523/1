@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>💰 接案薪資結算</title>
+    <title>💰 接案月結系統</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
@@ -15,6 +15,7 @@
             --accent-gold: #f5b942;
             --accent-gold-dim: #c9952e;
             --accent-green: #4ade80;
+            --accent-blue: #60a5fa;
             --accent-red: #f87171;
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
@@ -56,10 +57,6 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--accent-gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
         }
 
         .header p {
@@ -79,12 +76,12 @@
 
         .tab-btn {
             flex: 1;
-            padding: 0.75rem;
+            padding: 0.75rem 0.5rem;
             border: none;
             background: transparent;
             color: var(--text-secondary);
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
             border-radius: 10px;
             cursor: pointer;
@@ -206,28 +203,186 @@
             border: 1px solid var(--border-color);
         }
 
-        .btn-secondary:hover {
-            border-color: var(--text-muted);
-        }
-
-        .btn-danger {
+        .btn-outline {
             background: transparent;
-            color: var(--accent-red);
-            border: 1px solid var(--accent-red);
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
         }
 
-        .btn-danger:hover {
-            background: var(--accent-red);
+        .btn-outline:hover {
+            background: var(--accent-gold);
             color: var(--bg-primary);
         }
 
-        /* Location List */
-        .location-list {
+        /* Month Selector */
+        .month-selector {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .month-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border-radius: 10px;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .month-btn:hover {
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+        }
+
+        .current-month {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+            min-width: 140px;
+            text-align: center;
+        }
+
+        /* Entry Item */
+        .entry-item {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .entry-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .entry-rate {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .entry-body {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .count-control {
+            display: flex;
+            align-items: center;
             gap: 0.5rem;
         }
 
+        .count-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border-radius: 8px;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .count-btn:hover {
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+        }
+
+        .count-input {
+            width: 50px;
+            padding: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .count-input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        .entry-subtotal {
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .subtotal-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--accent-green);
+        }
+
+        .subtotal-detail {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Summary Card */
+        .summary-card {
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f2744 100%);
+            border: 1px solid #2d4a6f;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .summary-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+            line-height: 1.2;
+        }
+
+        .summary-details {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .summary-item {
+            text-align: center;
+        }
+
+        .summary-value {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .summary-item-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Location List in Settings */
         .location-item {
             display: flex;
             align-items: center;
@@ -236,17 +391,7 @@
             background: var(--bg-secondary);
             border-radius: 10px;
             border: 1px solid var(--border-color);
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .location-item:hover {
-            border-color: var(--accent-gold);
-        }
-
-        .location-item.selected {
-            border-color: var(--accent-gold);
-            background: rgba(245, 185, 66, 0.1);
+            margin-bottom: 0.5rem;
         }
 
         .location-info {
@@ -259,8 +404,8 @@
             color: var(--text-primary);
         }
 
-        .location-rate {
-            font-size: 0.875rem;
+        .location-detail {
+            font-size: 0.8rem;
             color: var(--text-secondary);
         }
 
@@ -293,51 +438,6 @@
             background: rgba(248, 113, 113, 0.1);
         }
 
-        /* Result Display */
-        .result-card {
-            background: linear-gradient(135deg, #1e3a5f 0%, #0f2744 100%);
-            border: 1px solid #2d4a6f;
-            text-align: center;
-            padding: 1.5rem;
-        }
-
-        .result-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .result-amount {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: var(--accent-gold);
-            line-height: 1.2;
-        }
-
-        .result-details {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .detail-item {
-            text-align: center;
-        }
-
-        .detail-value {
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .detail-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
         /* Empty State */
         .empty-state {
             text-align: center;
@@ -351,7 +451,36 @@
             opacity: 0.5;
         }
 
-        /* Toast Notification */
+        /* History Item */
+        .history-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .history-item:hover {
+            border-color: var(--accent-gold);
+        }
+
+        .history-month {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .history-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            color: var(--accent-green);
+        }
+
+        /* Toast */
         .toast {
             position: fixed;
             bottom: 2rem;
@@ -372,10 +501,6 @@
         .toast.show {
             opacity: 1;
             transform: translateX(-50%) translateY(0);
-        }
-
-        .toast.success {
-            border-color: var(--accent-green);
         }
 
         /* Modal */
@@ -431,16 +556,19 @@
                 padding: 0.75rem;
             }
             
-            .result-amount {
+            .summary-amount {
                 font-size: 2rem;
             }
             
-            .result-details {
+            .summary-details {
                 gap: 1rem;
+            }
+
+            .entry-body {
+                flex-wrap: wrap;
             }
         }
 
-        /* Safe area for notched phones */
         @supports (padding-bottom: env(safe-area-inset-bottom)) {
             body {
                 padding-bottom: env(safe-area-inset-bottom);
@@ -451,71 +579,88 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1>💰 接案薪資結算</h1>
-            <p>快速計算你的應收款項</p>
+            <h1>💰 接案月結系統</h1>
+            <p>每月結算你的接案收入</p>
         </header>
 
         <div class="tabs">
-            <button class="tab-btn active" data-tab="calculate">計算薪資</button>
-            <button class="tab-btn" data-tab="settings">管理地點</button>
+            <button class="tab-btn active" data-tab="calculate">月結計算</button>
+            <button class="tab-btn" data-tab="history">歷史紀錄</button>
+            <button class="tab-btn" data-tab="settings">地點設定</button>
         </div>
 
-        <!-- 計算頁面 -->
+        <!-- 月結計算頁面 -->
         <div id="calculate" class="tab-content active">
+            <div class="month-selector">
+                <button class="month-btn" onclick="changeMonth(-1)">◀</button>
+                <div class="current-month" id="currentMonth"></div>
+                <button class="month-btn" onclick="changeMonth(1)">▶</button>
+            </div>
+
             <div class="card">
-                <div class="card-title">選擇工作地點</div>
-                <div id="locationList" class="location-list">
+                <div class="card-title">輸入各地點次數</div>
+                <div id="entryList">
                     <!-- 動態生成 -->
                 </div>
             </div>
 
-            <div class="card" id="hoursCard" style="display: none;">
-                <div class="card-title">輸入工作時數</div>
-                <div class="form-group">
-                    <input type="number" id="hoursInput" class="form-input" 
-                           placeholder="例如：2.5" step="0.5" min="0" inputmode="decimal">
+            <div class="card summary-card" id="summaryCard">
+                <div class="summary-label" id="summaryMonth"></div>
+                <div class="summary-amount" id="summaryAmount">$0</div>
+                <div class="summary-details">
+                    <div class="summary-item">
+                        <div class="summary-value" id="summaryVisits">0</div>
+                        <div class="summary-item-label">總次數</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value" id="summaryHours">0</div>
+                        <div class="summary-item-label">總時數</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value" id="summaryLocations">0</div>
+                        <div class="summary-item-label">地點數</div>
+                    </div>
                 </div>
-                <button class="btn btn-primary" onclick="calculateSalary()">計算金額</button>
             </div>
 
-            <div class="card result-card" id="resultCard" style="display: none;">
-                <div class="result-label">應收金額</div>
-                <div class="result-amount" id="resultAmount">$0</div>
-                <div class="result-details">
-                    <div class="detail-item">
-                        <div class="detail-value" id="resultLocation">-</div>
-                        <div class="detail-label">地點</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-value" id="resultHours">-</div>
-                        <div class="detail-label">時數</div>
-                    </div>
-                    <div class="detail-item">
-                        <div class="detail-value" id="resultRate">-</div>
-                        <div class="detail-label">時薪</div>
-                    </div>
+            <button class="btn btn-primary" onclick="saveMonthData()" style="margin-top: 0.5rem;">
+                💾 儲存本月紀錄
+            </button>
+        </div>
+
+        <!-- 歷史紀錄頁面 -->
+        <div id="history" class="tab-content">
+            <div class="card">
+                <div class="card-title">月份紀錄</div>
+                <div id="historyList">
+                    <!-- 動態生成 -->
                 </div>
             </div>
         </div>
 
-        <!-- 設定頁面 -->
+        <!-- 地點設定頁面 -->
         <div id="settings" class="tab-content">
             <div class="card">
                 <div class="card-title">新增工作地點</div>
+                <div class="form-group">
+                    <input type="text" id="newLocation" class="form-input" placeholder="地點名稱">
+                </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <input type="text" id="newLocation" class="form-input" placeholder="地點名稱">
+                        <label class="form-label">時薪</label>
+                        <input type="number" id="newRate" class="form-input" placeholder="例如 500" inputmode="numeric">
                     </div>
                     <div class="form-group">
-                        <input type="number" id="newRate" class="form-input" placeholder="時薪" inputmode="numeric">
+                        <label class="form-label">每次時數</label>
+                        <input type="number" id="newHours" class="form-input" placeholder="例如 2" step="0.5" inputmode="decimal">
                     </div>
                 </div>
                 <button class="btn btn-primary" onclick="addLocation()">新增地點</button>
             </div>
 
             <div class="card">
-                <div class="card-title">已儲存的地點</div>
-                <div id="settingsLocationList" class="location-list">
+                <div class="card-title">已設定的地點</div>
+                <div id="locationList">
                     <!-- 動態生成 -->
                 </div>
             </div>
@@ -530,9 +675,15 @@
                 <label class="form-label">地點名稱</label>
                 <input type="text" id="editLocation" class="form-input">
             </div>
-            <div class="form-group">
-                <label class="form-label">時薪</label>
-                <input type="number" id="editRate" class="form-input" inputmode="numeric">
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">時薪</label>
+                    <input type="number" id="editRate" class="form-input" inputmode="numeric">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">每次時數</label>
+                    <input type="number" id="editHours" class="form-input" step="0.5" inputmode="decimal">
+                </div>
             </div>
             <div class="modal-actions">
                 <button class="btn btn-secondary" onclick="closeModal()">取消</button>
@@ -541,35 +692,55 @@
         </div>
     </div>
 
+    <!-- 詳情 Modal -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal">
+            <div class="modal-title" id="detailTitle"></div>
+            <div id="detailContent"></div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeDetailModal()">關閉</button>
+                <button class="btn btn-outline" style="color: var(--accent-red); border-color: var(--accent-red);" onclick="deleteHistory()">🗑️ 刪除</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast -->
     <div class="toast" id="toast"></div>
 
     <script>
-        // 資料管理
-        const STORAGE_KEY = 'work_rates';
-        let rates = {};
-        let selectedLocation = null;
+        // 資料結構
+        const LOCATIONS_KEY = 'work_locations';
+        const RECORDS_KEY = 'monthly_records';
+        
+        let locations = {};  // { name: { rate, hours } }
+        let records = {};    // { "2024-01": { location1: count, location2: count, ... } }
+        let currentYear, currentMonth;
         let editingKey = null;
+        let viewingMonth = null;
 
         // 初始化
         function init() {
             loadData();
             setupTabs();
-            renderLocationList();
-            renderSettingsLocationList();
+            initMonth();
+            render();
         }
 
         // 讀取資料
         function loadData() {
-            const saved = localStorage.getItem(STORAGE_KEY);
-            if (saved) {
-                rates = JSON.parse(saved);
-            }
+            const savedLocations = localStorage.getItem(LOCATIONS_KEY);
+            const savedRecords = localStorage.getItem(RECORDS_KEY);
+            if (savedLocations) locations = JSON.parse(savedLocations);
+            if (savedRecords) records = JSON.parse(savedRecords);
         }
 
         // 儲存資料
-        function saveData() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(rates));
+        function saveLocations() {
+            localStorage.setItem(LOCATIONS_KEY, JSON.stringify(locations));
+        }
+
+        function saveRecords() {
+            localStorage.setItem(RECORDS_KEY, JSON.stringify(records));
         }
 
         // Tab 切換
@@ -580,41 +751,163 @@
                     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
                     btn.classList.add('active');
                     document.getElementById(btn.dataset.tab).classList.add('active');
+                    if (btn.dataset.tab === 'history') renderHistory();
                 });
             });
         }
 
-        // 渲染計算頁的地點列表
-        function renderLocationList() {
-            const container = document.getElementById('locationList');
-            const keys = Object.keys(rates);
+        // 初始化月份
+        function initMonth() {
+            const now = new Date();
+            currentYear = now.getFullYear();
+            currentMonth = now.getMonth() + 1;
+        }
+
+        // 月份切換
+        function changeMonth(delta) {
+            currentMonth += delta;
+            if (currentMonth > 12) {
+                currentMonth = 1;
+                currentYear++;
+            } else if (currentMonth < 1) {
+                currentMonth = 12;
+                currentYear--;
+            }
+            render();
+        }
+
+        // 取得月份 key
+        function getMonthKey() {
+            return `${currentYear}-${String(currentMonth).padStart(2, '0')}`;
+        }
+
+        // 格式化月份顯示
+        function formatMonth(key) {
+            const [y, m] = key.split('-');
+            return `${y} 年 ${parseInt(m)} 月`;
+        }
+
+        // 渲染所有
+        function render() {
+            renderMonthSelector();
+            renderEntryList();
+            renderSummary();
+            renderLocationList();
+        }
+
+        // 渲染月份選擇器
+        function renderMonthSelector() {
+            document.getElementById('currentMonth').textContent = `${currentYear} 年 ${currentMonth} 月`;
+        }
+
+        // 渲染輸入列表
+        function renderEntryList() {
+            const container = document.getElementById('entryList');
+            const keys = Object.keys(locations);
+            const monthKey = getMonthKey();
+            const monthData = records[monthKey] || {};
 
             if (keys.length === 0) {
                 container.innerHTML = `
                     <div class="empty-state">
                         <div class="empty-state-icon">📍</div>
-                        <p>尚未設定地點<br>請到「管理地點」新增</p>
+                        <p>尚未設定地點<br>請到「地點設定」新增</p>
                     </div>
                 `;
-                document.getElementById('hoursCard').style.display = 'none';
                 return;
             }
 
-            container.innerHTML = keys.map(key => `
-                <div class="location-item ${selectedLocation === key ? 'selected' : ''}" 
-                     onclick="selectLocation('${key}')">
-                    <div class="location-info">
-                        <span class="location-name">${key}</span>
-                        <span class="location-rate">$${rates[key]} / 小時</span>
+            container.innerHTML = keys.map(key => {
+                const loc = locations[key];
+                const count = monthData[key] || 0;
+                const subtotal = count * loc.hours * loc.rate;
+                
+                return `
+                    <div class="entry-item">
+                        <div class="entry-header">
+                            <span class="entry-name">${key}</span>
+                            <span class="entry-rate">$${loc.rate}/hr × ${loc.hours}hr</span>
+                        </div>
+                        <div class="entry-body">
+                            <div class="count-control">
+                                <button class="count-btn" onclick="adjustCount('${key}', -1)">−</button>
+                                <input type="number" class="count-input" value="${count}" 
+                                       onchange="setCount('${key}', this.value)" 
+                                       inputmode="numeric" min="0">
+                                <button class="count-btn" onclick="adjustCount('${key}', 1)">+</button>
+                                <span style="color: var(--text-muted); font-size: 0.875rem;">次</span>
+                            </div>
+                            <div class="entry-subtotal">
+                                <div class="subtotal-amount">$${subtotal.toLocaleString()}</div>
+                                <div class="subtotal-detail">${count * loc.hours} 小時</div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
-        // 渲染設定頁的地點列表
-        function renderSettingsLocationList() {
-            const container = document.getElementById('settingsLocationList');
-            const keys = Object.keys(rates);
+        // 調整次數
+        function adjustCount(key, delta) {
+            const monthKey = getMonthKey();
+            if (!records[monthKey]) records[monthKey] = {};
+            
+            const current = records[monthKey][key] || 0;
+            const newCount = Math.max(0, current + delta);
+            records[monthKey][key] = newCount;
+            
+            render();
+        }
+
+        // 設定次數
+        function setCount(key, value) {
+            const monthKey = getMonthKey();
+            if (!records[monthKey]) records[monthKey] = {};
+            
+            const count = Math.max(0, parseInt(value) || 0);
+            records[monthKey][key] = count;
+            
+            render();
+        }
+
+        // 渲染總結
+        function renderSummary() {
+            const monthKey = getMonthKey();
+            const monthData = records[monthKey] || {};
+            
+            let totalAmount = 0;
+            let totalVisits = 0;
+            let totalHours = 0;
+            let activeLocations = 0;
+
+            Object.keys(locations).forEach(key => {
+                const count = monthData[key] || 0;
+                if (count > 0) {
+                    const loc = locations[key];
+                    totalAmount += count * loc.hours * loc.rate;
+                    totalVisits += count;
+                    totalHours += count * loc.hours;
+                    activeLocations++;
+                }
+            });
+
+            document.getElementById('summaryMonth').textContent = `${currentYear} 年 ${currentMonth} 月 總收入`;
+            document.getElementById('summaryAmount').textContent = `$${totalAmount.toLocaleString()}`;
+            document.getElementById('summaryVisits').textContent = totalVisits;
+            document.getElementById('summaryHours').textContent = totalHours;
+            document.getElementById('summaryLocations').textContent = activeLocations;
+        }
+
+        // 儲存月份資料
+        function saveMonthData() {
+            saveRecords();
+            showToast('✅ 本月紀錄已儲存');
+        }
+
+        // 渲染地點列表
+        function renderLocationList() {
+            const container = document.getElementById('locationList');
+            const keys = Object.keys(locations);
 
             if (keys.length === 0) {
                 container.innerHTML = `
@@ -626,95 +919,51 @@
                 return;
             }
 
-            container.innerHTML = keys.map(key => `
-                <div class="location-item">
-                    <div class="location-info">
-                        <span class="location-name">${key}</span>
-                        <span class="location-rate">$${rates[key]} / 小時</span>
+            container.innerHTML = keys.map(key => {
+                const loc = locations[key];
+                return `
+                    <div class="location-item">
+                        <div class="location-info">
+                            <span class="location-name">${key}</span>
+                            <span class="location-detail">$${loc.rate}/hr × ${loc.hours}hr = $${loc.rate * loc.hours}/次</span>
+                        </div>
+                        <div class="location-actions">
+                            <button class="icon-btn" onclick="openEditModal('${key}')" title="編輯">✏️</button>
+                            <button class="icon-btn delete" onclick="deleteLocation('${key}')" title="刪除">🗑️</button>
+                        </div>
                     </div>
-                    <div class="location-actions">
-                        <button class="icon-btn" onclick="openEditModal('${key}')" title="編輯">✏️</button>
-                        <button class="icon-btn delete" onclick="deleteLocation('${key}')" title="刪除">🗑️</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // 選擇地點
-        function selectLocation(key) {
-            selectedLocation = key;
-            renderLocationList();
-            document.getElementById('hoursCard').style.display = 'block';
-            document.getElementById('hoursInput').focus();
-        }
-
-        // 計算薪資
-        function calculateSalary() {
-            if (!selectedLocation) {
-                showToast('請先選擇地點');
-                return;
-            }
-
-            const hours = parseFloat(document.getElementById('hoursInput').value);
-            if (isNaN(hours) || hours <= 0) {
-                showToast('請輸入有效的時數');
-                return;
-            }
-
-            const rate = rates[selectedLocation];
-            const total = Math.round(hours * rate);
-
-            document.getElementById('resultAmount').textContent = `$${total.toLocaleString()}`;
-            document.getElementById('resultLocation').textContent = selectedLocation;
-            document.getElementById('resultHours').textContent = `${hours} hr`;
-            document.getElementById('resultRate').textContent = `$${rate}`;
-            document.getElementById('resultCard').style.display = 'block';
-
-            // 滾動到結果
-            document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                `;
+            }).join('');
         }
 
         // 新增地點
         function addLocation() {
-            const location = document.getElementById('newLocation').value.trim();
+            const name = document.getElementById('newLocation').value.trim();
             const rate = parseInt(document.getElementById('newRate').value);
+            const hours = parseFloat(document.getElementById('newHours').value);
 
-            if (!location) {
-                showToast('請輸入地點名稱');
-                return;
-            }
-            if (isNaN(rate) || rate <= 0) {
-                showToast('請輸入有效的時薪');
-                return;
-            }
-            if (rates[location]) {
-                showToast('此地點已存在');
-                return;
-            }
+            if (!name) return showToast('請輸入地點名稱');
+            if (isNaN(rate) || rate <= 0) return showToast('請輸入有效的時薪');
+            if (isNaN(hours) || hours <= 0) return showToast('請輸入有效的時數');
+            if (locations[name]) return showToast('此地點已存在');
 
-            rates[location] = rate;
-            saveData();
-            
+            locations[name] = { rate, hours };
+            saveLocations();
+
             document.getElementById('newLocation').value = '';
             document.getElementById('newRate').value = '';
-            
-            renderLocationList();
-            renderSettingsLocationList();
-            showToast(`✅ 已新增「${location}」`, 'success');
+            document.getElementById('newHours').value = '';
+
+            render();
+            showToast(`✅ 已新增「${name}」`);
         }
 
         // 刪除地點
         function deleteLocation(key) {
             if (confirm(`確定要刪除「${key}」嗎？`)) {
-                delete rates[key];
-                if (selectedLocation === key) {
-                    selectedLocation = null;
-                    document.getElementById('hoursCard').style.display = 'none';
-                    document.getElementById('resultCard').style.display = 'none';
-                }
-                saveData();
-                renderLocationList();
-                renderSettingsLocationList();
+                delete locations[key];
+                saveLocations();
+                render();
                 showToast(`已刪除「${key}」`);
             }
         }
@@ -723,7 +972,8 @@
         function openEditModal(key) {
             editingKey = key;
             document.getElementById('editLocation').value = key;
-            document.getElementById('editRate').value = rates[key];
+            document.getElementById('editRate').value = locations[key].rate;
+            document.getElementById('editHours').value = locations[key].hours;
             document.getElementById('editModal').classList.add('show');
         }
 
@@ -735,64 +985,141 @@
 
         // 儲存編輯
         function saveEdit() {
-            const newLocation = document.getElementById('editLocation').value.trim();
+            const newName = document.getElementById('editLocation').value.trim();
             const newRate = parseInt(document.getElementById('editRate').value);
+            const newHours = parseFloat(document.getElementById('editHours').value);
 
-            if (!newLocation) {
-                showToast('請輸入地點名稱');
-                return;
-            }
-            if (isNaN(newRate) || newRate <= 0) {
-                showToast('請輸入有效的時薪');
-                return;
-            }
-            if (newLocation !== editingKey && rates[newLocation]) {
-                showToast('此地點名稱已存在');
-                return;
-            }
+            if (!newName) return showToast('請輸入地點名稱');
+            if (isNaN(newRate) || newRate <= 0) return showToast('請輸入有效的時薪');
+            if (isNaN(newHours) || newHours <= 0) return showToast('請輸入有效的時數');
+            if (newName !== editingKey && locations[newName]) return showToast('此地點名稱已存在');
 
-            // 如果名稱改變，刪除舊的
-            if (newLocation !== editingKey) {
-                delete rates[editingKey];
-                if (selectedLocation === editingKey) {
-                    selectedLocation = newLocation;
-                }
+            // 如果名稱改變
+            if (newName !== editingKey) {
+                // 更新所有紀錄中的 key
+                Object.keys(records).forEach(monthKey => {
+                    if (records[monthKey][editingKey] !== undefined) {
+                        records[monthKey][newName] = records[monthKey][editingKey];
+                        delete records[monthKey][editingKey];
+                    }
+                });
+                delete locations[editingKey];
             }
 
-            rates[newLocation] = newRate;
-            saveData();
+            locations[newName] = { rate: newRate, hours: newHours };
+            saveLocations();
+            saveRecords();
             closeModal();
-            renderLocationList();
-            renderSettingsLocationList();
-            showToast('✅ 已更新', 'success');
+            render();
+            showToast('✅ 已更新');
+        }
+
+        // 渲染歷史紀錄
+        function renderHistory() {
+            const container = document.getElementById('historyList');
+            const monthKeys = Object.keys(records).sort().reverse();
+
+            if (monthKeys.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📅</div>
+                        <p>尚無歷史紀錄</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = monthKeys.map(monthKey => {
+                const monthData = records[monthKey];
+                let total = 0;
+                
+                Object.keys(monthData).forEach(locKey => {
+                    if (locations[locKey]) {
+                        const count = monthData[locKey];
+                        total += count * locations[locKey].hours * locations[locKey].rate;
+                    }
+                });
+
+                return `
+                    <div class="history-item" onclick="showDetail('${monthKey}')">
+                        <span class="history-month">${formatMonth(monthKey)}</span>
+                        <span class="history-amount">$${total.toLocaleString()}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 顯示詳情
+        function showDetail(monthKey) {
+            viewingMonth = monthKey;
+            const monthData = records[monthKey];
+            
+            let html = '<div style="margin-top: 1rem;">';
+            let total = 0;
+
+            Object.keys(monthData).forEach(locKey => {
+                const count = monthData[locKey];
+                if (count > 0 && locations[locKey]) {
+                    const loc = locations[locKey];
+                    const subtotal = count * loc.hours * loc.rate;
+                    total += subtotal;
+                    
+                    html += `
+                        <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                            <div>
+                                <div style="font-weight: 500;">${locKey}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">${count} 次 × ${loc.hours}hr × $${loc.rate}</div>
+                            </div>
+                            <div style="font-family: 'JetBrains Mono'; color: var(--accent-green);">$${subtotal.toLocaleString()}</div>
+                        </div>
+                    `;
+                }
+            });
+
+            html += `
+                <div style="display: flex; justify-content: space-between; padding: 1rem 0; font-weight: 600;">
+                    <div>總計</div>
+                    <div style="font-family: 'JetBrains Mono'; color: var(--accent-gold); font-size: 1.25rem;">$${total.toLocaleString()}</div>
+                </div>
+            `;
+            html += '</div>';
+
+            document.getElementById('detailTitle').textContent = formatMonth(monthKey) + ' 明細';
+            document.getElementById('detailContent').innerHTML = html;
+            document.getElementById('detailModal').classList.add('show');
+        }
+
+        // 關閉詳情
+        function closeDetailModal() {
+            document.getElementById('detailModal').classList.remove('show');
+            viewingMonth = null;
+        }
+
+        // 刪除歷史紀錄
+        function deleteHistory() {
+            if (viewingMonth && confirm(`確定要刪除 ${formatMonth(viewingMonth)} 的紀錄嗎？`)) {
+                delete records[viewingMonth];
+                saveRecords();
+                closeDetailModal();
+                renderHistory();
+                showToast('已刪除紀錄');
+            }
         }
 
         // 顯示 Toast
-        function showToast(message, type = '') {
+        function showToast(message) {
             const toast = document.getElementById('toast');
             toast.textContent = message;
-            toast.className = 'toast show' + (type ? ' ' + type : '');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2500);
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
         }
-
-        // 監聽 Enter 鍵
-        document.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                if (document.activeElement.id === 'hoursInput') {
-                    calculateSalary();
-                } else if (document.activeElement.id === 'newRate') {
-                    addLocation();
-                }
-            }
-        });
 
         // 點擊 Modal 外部關閉
         document.getElementById('editModal').addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal-overlay')) {
-                closeModal();
-            }
+            if (e.target.classList.contains('modal-overlay')) closeModal();
+        });
+        document.getElementById('detailModal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) closeDetailModal();
         });
 
         // 啟動
